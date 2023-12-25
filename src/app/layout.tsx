@@ -5,6 +5,8 @@ import React from 'react';
 import { dark } from '@clerk/themes';
 import { ClerkProvider } from '@clerk/nextjs';
 
+import { ThemeProvider } from '@/components/theme-provider';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -16,7 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang='en'>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <ThemeProvider attribute='class' forcedTheme='dark' storageKey='realtime-streaming-theme'>
+            {children}
+          </ThemeProvider>
+        </body>
       </html>
     </ClerkProvider>
   );
