@@ -4,6 +4,7 @@ import './globals.css';
 import React from 'react';
 import { dark } from '@clerk/themes';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'sonner';
 
 import { ThemeProvider } from '@/components/theme-provider';
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang='en'>
         <body className={inter.className}>
           <ThemeProvider attribute='class' forcedTheme='dark' storageKey='realtime-streaming-theme'>
+            <Toaster theme='light' position='bottom-center' />
             {children}
           </ThemeProvider>
         </body>
