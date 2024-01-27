@@ -21,3 +21,27 @@ export const getSelf = async () => {
 
   return user;
 };
+
+export const getSelfByUsername = async (username: string) => {
+  const self = await currentUser();
+
+  if (!self || !self.username) {
+    throw new Error('Unauthorized');
+  }
+
+  const user = await db.user.findUnique({
+    where: {
+      username,
+    },
+  });
+
+  if (!user) {
+    throw new Error('유저를 찾지 못했습니다.');
+  }
+
+  if (self.username !== user.username) {
+    throw new Error('Unauthorized');
+  }
+
+  return user;
+};
